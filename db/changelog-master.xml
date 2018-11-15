@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Robert" id="0001">
+        <createTable tableName="user">
+            <column name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="email" type="VARCHAR(45)"/>
+            <column name="age" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Robert" id="0002">
+        <sql>
+            INSERT INTO `user` VALUES (5,'Robert Koziolek','robertkoziolek4c@gmail.com',55);
+            INSERT INTO `user` VALUES (6,'Andrzej Gołota','golota@o2.pl',97);
+            INSERT INTO `user` VALUES (7,'Adas Miauczynski','adam_miau@kota.pl',17);
+            INSERT INTO `user` VALUES (8,'Weronika Partotatyga','mamdziwnenazwisko@serio.pl',20);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
