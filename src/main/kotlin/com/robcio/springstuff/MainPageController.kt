@@ -6,7 +6,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class SimpleController {
+class MainPageController {
     @Value("\${spring.application.name}")
     internal var appName: String? = null
 

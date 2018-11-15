@@ -4,13 +4,14 @@ import com.robcio.springstuff.entity.User;
 import com.robcio.springstuff.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/users")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -20,19 +21,15 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @ResponseBody
-    @GetMapping(path = "/add")
-    public String add(@RequestParam final String name, @RequestParam final String email) {
-        final User user = new User();
-        user.setName(name);
-        user.setEmail(email);
+    @PostMapping(path = "/add")
+    public String add(@ModelAttribute final User user) {
         userRepository.save(user);
-        return "Saved";
+        return "redirect:/users/all";
     }
 
     @GetMapping(path = "/all")
-    @ResponseBody
-    public Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+    public String getAllUsers(final Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        return "users";
     }
 }
