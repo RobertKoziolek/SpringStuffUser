@@ -3,25 +3,47 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <changeSet author="Robert" id="1542311030627-1">
+    <changeSet author="Robert" id="1">
         <createTable tableName="hibernate_sequence">
             <column name="next_val" type="BIGINT"/>
         </createTable>
         <createTable tableName="user">
-            <column autoIncrement="true" name="id" type="SERIAL">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="users_pkey"/>
             </column>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="email" type="VARCHAR(255)"/>
-            <column name="age" type="INT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <sql>
             INSERT INTO hibernate_sequence(next_val) VALUES (0);
             INSERT INTO `user` (name, email, age) VALUES ('Robert Koziolek','robertkoziolek4c@gmail.com',55);
             INSERT INTO `user` (name, email, age) VALUES ('Andrzej Gołota','golota@o2.pl',97);
             INSERT INTO `user` (name, email, age) VALUES ('Adas Miauczynski','adam_miau@kota.pl',17);
-            INSERT INTO `user` (name, email, age) VALUES ('Weronika Partotatyga','mamdziwnenazwisko@serio.pl',20);
-
+            INSERT INTO `user` (name, email, age) VALUES ('Weronika Partotatyga','takitammail@serio.pl',20);
         </sql>
     </changeSet>
+    <changeSet author="Robert" id="2">
+        <createTable tableName="inventory_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_user_inventory_item" references="user(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

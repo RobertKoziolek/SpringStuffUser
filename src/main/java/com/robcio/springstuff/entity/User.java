@@ -3,10 +3,8 @@ package com.robcio.springstuff.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -14,7 +12,7 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -22,4 +20,6 @@ public class User {
 
     private Integer age;
 
+    @OneToMany(mappedBy = "user")
+    private Set<InventoryItem> items;
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Item addition</title>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Item addition !</h1>
+    <p>Here, you can add an item to a user's inventory</p>
+    <div class="jumbotron">
+        <form class="form-horizontal" method="post" th:action="@{/items/add}" th:object="${item}">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="user">User:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="user" name="userId">
+                        <option th:each="user : ${users}" th:text="${user.name}" th:value="${user.id}">
+                        </option>
+                    </select>
+                </div>
+                <label class="control-label col-sm-2" for="name">Item name:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="name" name="name" placeholder="Enter item name" type="text">
+                </div>
+                <div class="col-sm-offset-2">
+                <span th:each="itemType : ${itemTypes}">
+                    <input name="type" th:id="${{itemType}}" th:value="${{itemType}}" type="radio"/>
+                    <label class="radio-inline" th:for="${{itemType}}" th:text="${{itemType}}">item type</label>
+                </span>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-default" type="submit">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Tibia here</title>
+    <title>App nexus</title>
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
     <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -19,12 +19,19 @@
     <div class="alert alert-primary" role="alert">
         From here you can get to the app's functionality. All of it.
     </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Users</h3>
+            <p>You can see all the users stored in the app database by clicking the button below.</p>
+            <p><a class="btn btn-info" href="/users/" role="button">Users</a></p>
 
-    <div class="col-sm-4">
-        <h3>Users</h3>
-        <p>You can see all the users stored in the app database by clicking the button below</p>
-        <p><a class="btn btn-info" href="/users/" role="button">Users</a></p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Items</h3>
+            <p>You can give a user an item.</p>
+            <p><a class="btn btn-info" href="/items/add" role="button">Add item</a></p>
 
+        </div>
     </div>
 </div>
 </body>
