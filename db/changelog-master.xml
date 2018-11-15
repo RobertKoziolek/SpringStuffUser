@@ -3,22 +3,25 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <changeSet author="Robert" id="0001">
+    <changeSet author="Robert" id="1542311030627-1">
+        <createTable tableName="hibernate_sequence">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
         <createTable tableName="user">
-            <column name="id" type="INT">
-                <constraints primaryKey="true"/>
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="users_pkey"/>
             </column>
-            <column name="name" type="VARCHAR(45)"/>
-            <column name="email" type="VARCHAR(45)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
             <column name="age" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="Robert" id="0002">
         <sql>
-            INSERT INTO `user` VALUES (5,'Robert Koziolek','robertkoziolek4c@gmail.com',55);
-            INSERT INTO `user` VALUES (6,'Andrzej Gołota','golota@o2.pl',97);
-            INSERT INTO `user` VALUES (7,'Adas Miauczynski','adam_miau@kota.pl',17);
-            INSERT INTO `user` VALUES (8,'Weronika Partotatyga','mamdziwnenazwisko@serio.pl',20);
+            INSERT INTO hibernate_sequence(next_val) VALUES (0);
+            INSERT INTO `user` (name, email, age) VALUES ('Robert Koziolek','robertkoziolek4c@gmail.com',55);
+            INSERT INTO `user` (name, email, age) VALUES ('Andrzej Gołota','golota@o2.pl',97);
+            INSERT INTO `user` (name, email, age) VALUES ('Adas Miauczynski','adam_miau@kota.pl',17);
+            INSERT INTO `user` (name, email, age) VALUES ('Weronika Partotatyga','mamdziwnenazwisko@serio.pl',20);
+
         </sql>
     </changeSet>
 </databaseChangeLog>

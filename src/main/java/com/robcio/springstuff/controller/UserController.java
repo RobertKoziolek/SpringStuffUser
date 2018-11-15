@@ -24,10 +24,10 @@ public class UserController {
     @PostMapping(path = "/add")
     public String add(@ModelAttribute final User user) {
         userRepository.save(user);
-        return "redirect:/users/all";
+        return "redirect:/users/";
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/")
     public String getAllUsers(final Model model) {
         model.addAttribute("users", userRepository.findAll());
         return "users";

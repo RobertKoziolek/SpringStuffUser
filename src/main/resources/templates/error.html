@@ -14,17 +14,40 @@
 </head>
 <body>
 <div class="container">
-    <h1>Hello !</h1>
-    <p>Welcome to <span th:text="${appName}">Our App</span></p>
-    <div class="alert alert-primary" role="alert">
-        From here you can get to the app's functionality. All of it.
+    <h1>Error page!</h1>
+    <div class="alert alert-danger" role="alert">
+        <table class="table">
+            <tr>
+                <td>Timestamp</td>
+                <td th:text="${timestamp}"></td>
+            </tr>
+            <tr>
+                <td>Path</td>
+                <td th:text="${path}"></td>
+            </tr>
+            <tr>
+                <td>Error</td>
+                <td th:text="${error}"></td>
+            </tr>
+            <tr>
+                <td>Status code</td>
+                <td th:text="${status}"></td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td th:text="${message}"></td>
+            </tr>
+        </table>
     </div>
-
-    <div class="col-sm-4">
-        <h3>Users</h3>
-        <p>You can see all the users stored in the app database by clicking the button below</p>
-        <p><a class="btn btn-info" href="/users/" role="button">Users</a></p>
-
+    <p>
+        <button aria-controls="showTrace" aria-expanded="false" class="btn btn-primary" data-target="#showTrace"
+                data-toggle="collapse" type="button">Show Trace
+        </button>
+    </p>
+    <div class="collapse" id="showTrace">
+        <div class="jumbotron">
+            <pre th:text="${trace}"></pre>
+        </div>
     </div>
 </div>
 </body>

@@ -76,3 +76,9 @@ liquibase {
         }
     }
 }
+
+task dropAndUpdate(group: 'application') << {
+    println 'Dropped database and updated'
+}
+dropAndUpdate.dependsOn dropAll
+dropAndUpdate.dependsOn update
