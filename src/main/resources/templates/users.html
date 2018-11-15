@@ -15,7 +15,43 @@
 <body>
 <div class="container">
     <h1>Users table !</h1>
-    <p>This table represents users contained in the app database</p>
+    <p>This table represents users contained in the app database.
+        <button aria-controls="addUser" aria-expanded="false" class="btn btn-primary float-right" data-target="#addUser"
+                data-toggle="collapse" type="button">
+            Add user
+        </button>
+    </p>
+    <div class="collapse" id="addUser">
+        <div class="jumbotron">
+            <h1>Add user</h1>
+            <form class="form-horizontal" method="post" th:action="@{/users/add}" th:object="${user}">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="name">Name:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="name" name="name" placeholder="Enter name" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Email:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="email" name="email" placeholder="Enter email" type="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="age">Age:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="age" max="99" min="1" name="age" placeholder="Enter age"
+                               type="number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-default" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="alert alert-primary" role="alert">
         <table class="table">
             <thead class="thead-dark">
@@ -37,35 +73,6 @@
             </th:block>
             </tbody>
         </table>
-    </div>
-    <div class="jumbotron">
-        <h1>Add user</h1>
-        <form class="form-horizontal" method="post" th:action="@{/users/add}" th:object="${user}">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Name:</label>
-                <div class="col-sm-10">
-                    <input class="form-control" id="name" name="name" placeholder="Enter name" type="text">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="email">Email:</label>
-                <div class="col-sm-10">
-                    <input class="form-control" id="email" name="email" placeholder="Enter email" type="email">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="age">Age:</label>
-                <div class="col-sm-10">
-                    <input class="form-control" id="age" max="99" min="1" name="age" placeholder="Enter age"
-                           type="number">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" type="submit">Submit</button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 </body>
