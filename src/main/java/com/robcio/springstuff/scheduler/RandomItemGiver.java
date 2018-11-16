@@ -23,7 +23,7 @@ public class RandomItemGiver {
         this.inventoryItemOperator = inventoryItemOperator;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 60000)
     public void giveRandomUserRandomItem() {
         final User randomUser = userOperator.getRandomUser();
         final InventoryItem inventoryItem = inventoryItemOperator.giveUserRandomItem(randomUser.getId());

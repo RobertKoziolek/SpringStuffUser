@@ -45,28 +45,32 @@ repositories {
 
 
 dependencies {
+    //CORE
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
 
-//    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
+    //DATABASE
+    compile 'mysql:mysql-connector-java'
+    liquibaseRuntime 'org.liquibase:liquibase-core:3.6.1'
+    liquibaseRuntime 'mysql:mysql-connector-java'
+
+    //DOCUMENTATION
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+    //UTIL
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
-
     compile "org.projectlombok:lombok:1.16.20"
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
 
-    compile 'mysql:mysql-connector-java'
-
-    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compile("org.jetbrains.kotlin:kotlin-reflect")
-
+    //TEST
     testCompile('org.springframework.boot:spring-boot-starter-test')
-
-    liquibaseRuntime 'org.liquibase:liquibase-core:3.6.1'
-    liquibaseRuntime 'mysql:mysql-connector-java'
 }
 
 liquibase {
