@@ -5,9 +5,7 @@ import com.robcio.springstuff.entity.InventoryItem;
 import com.robcio.springstuff.entity.User;
 import com.robcio.springstuff.enumeration.ItemType;
 import com.robcio.springstuff.repository.InventoryItemRepository;
-import com.robcio.springstuff.repository.UserRepository;
 import com.robcio.springstuff.util.ItemNameGenerator;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,26 +15,35 @@ import java.util.Random;
 public class InventoryItemService {
 
     private final InventoryItemRepository inventoryItemRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final ItemNameGenerator itemNameGenerator;
 
     @Autowired
     public InventoryItemService(final InventoryItemRepository inventoryItemRepository,
-                                final UserRepository userRepository,
+                                final UserService userService,
                                 final ItemNameGenerator itemNameGenerator) {
         this.inventoryItemRepository = inventoryItemRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
         this.itemNameGenerator = itemNameGenerator;
     }
 
-    public InventoryItem giveUserRandomItem(final Long userId) {
-        final ItemType randomType = ItemType.values()[new Random().nextInt(ItemType.values().length)];
-        final InventoryItem inventoryItem = new InventoryItem();
-        inventoryItem.setUser(getUser(userId));
-        inventoryItem.setType(randomType);
-        inventoryItem.setName(itemNameGenerator.getFor(randomType));
-        inventoryItemRepository.save(inventoryItem);
-        return inventoryItem;
+    public void giveItem(final Long userId, final InventoryItem item) {
+        final User user = userService.getUser(userId);
+        item.setUser(user);
+        inventoryItemRepository.save(item);
+    }
+
+    public InventoryItem getRandomItem() {
+        final ItemType[] types = ItemType.values();
+        final ItemType type = types[new Random().nextInt(types.length)];
+        return getRandomItem(type);
+    }
+
+    public InventoryItem getRandomItem(final ItemType itemType) {
+        final InventoryItem item = new InventoryItem();
+        item.setType(itemType);
+        item.setName(itemNameGenerator.getFor(itemType));
+        return item;
     }
 
     public String getUserItemsListed(final Long userId) {
@@ -51,13 +58,6 @@ public class InventoryItemService {
         final InventoryItem inventoryItem = new InventoryItem();
         inventoryItem.setName(itemData.getName());
         inventoryItem.setType(itemData.getType());
-        inventoryItem.setUser(getUser(itemData.getUserId()));
-        inventoryItemRepository.save(inventoryItem);
-    }
-
-    @NotNull
-    private User getUser(final Long userId) {
-        return userRepository.findById(userId)
-                             .orElseThrow(() -> new RuntimeException("Cannot find the user"));
+        giveItem(itemData.getUserId(), inventoryItem);
     }
 }
