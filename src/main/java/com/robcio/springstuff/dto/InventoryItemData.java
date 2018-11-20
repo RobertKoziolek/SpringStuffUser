@@ -1,4 +1,4 @@
-package com.robcio.springstuff.controller.request;
+package com.robcio.springstuff.dto;
 
 import com.robcio.springstuff.enumeration.ItemType;
 import lombok.Getter;

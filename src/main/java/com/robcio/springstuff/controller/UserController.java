@@ -28,10 +28,10 @@ public class UserController {
     @ApiOperation(value = "Adds a user")
     public String add(@ModelAttribute final User user) {
         userRepository.save(user);
-        return "redirect:/users/";
+        return "redirect:/users/view";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/view")
     @ApiOperation(value = "Shows all users")
     public String getAllUsers(final Model model) {
         model.addAttribute("users", userRepository.findAll());

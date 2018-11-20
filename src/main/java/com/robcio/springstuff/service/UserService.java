@@ -1,4 +1,4 @@
-package com.robcio.springstuff.operator;
+package com.robcio.springstuff.service;
 
 import com.robcio.springstuff.entity.User;
 import com.robcio.springstuff.repository.UserRepository;
@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserOperator {
+public class UserService {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserOperator(final UserRepository userRepository) {
+    public UserService(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

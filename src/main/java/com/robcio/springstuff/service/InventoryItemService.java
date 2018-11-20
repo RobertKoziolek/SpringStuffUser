@@ -1,6 +1,6 @@
-package com.robcio.springstuff.operator;
+package com.robcio.springstuff.service;
 
-import com.robcio.springstuff.controller.request.InventoryItemData;
+import com.robcio.springstuff.dto.InventoryItemData;
 import com.robcio.springstuff.entity.InventoryItem;
 import com.robcio.springstuff.entity.User;
 import com.robcio.springstuff.enumeration.ItemType;
@@ -9,21 +9,21 @@ import com.robcio.springstuff.repository.UserRepository;
 import com.robcio.springstuff.util.ItemNameGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
-@Component
-public class InventoryItemOperator {
+@Service
+public class InventoryItemService {
 
     private final InventoryItemRepository inventoryItemRepository;
     private final UserRepository userRepository;
     private final ItemNameGenerator itemNameGenerator;
 
     @Autowired
-    public InventoryItemOperator(final InventoryItemRepository inventoryItemRepository,
-                                 final UserRepository userRepository,
-                                 final ItemNameGenerator itemNameGenerator) {
+    public InventoryItemService(final InventoryItemRepository inventoryItemRepository,
+                                final UserRepository userRepository,
+                                final ItemNameGenerator itemNameGenerator) {
         this.inventoryItemRepository = inventoryItemRepository;
         this.userRepository = userRepository;
         this.itemNameGenerator = itemNameGenerator;
