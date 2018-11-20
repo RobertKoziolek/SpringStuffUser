@@ -1,5 +1,6 @@
 package com.robcio.springstuff.entity;
 
+import com.robcio.springstuff.enumeration.UserStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,4 +23,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<InventoryItem> items;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 }

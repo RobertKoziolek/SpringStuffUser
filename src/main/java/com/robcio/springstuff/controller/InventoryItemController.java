@@ -27,14 +27,14 @@ public class InventoryItemController {
     }
 
     @PostMapping(path = "/add")
-    @ApiOperation(value = "Adds an item for a user")
+    @ApiOperation(value = "Adds an item")
     public String addItemToUser(@ModelAttribute final InventoryItemData itemData) {
         inventoryItemOperator.createItem(itemData);
         return "redirect:/items/" + itemData.getUserId();
     }
 
     @GetMapping(path = "/add")
-    @ApiOperation(value = "Shows add item thymeleaf page")
+    @ApiOperation(value = "Shows 'add item' thymeleaf page")
     public String addItem(final Model model) {
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("itemTypes", ItemType.values());

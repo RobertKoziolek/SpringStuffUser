@@ -45,5 +45,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet author="Robert" id="3">
+        <sql>
+            ALTER TABLE `user` ADD status VARCHAR(25) DEFAULT 'IDLE';
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>

@@ -13,8 +13,7 @@ import org.springframework.stereotype.Component;
 public class RandomItemGiver {
 
     private static final Logger logger = LoggerFactory.getLogger(RandomItemGiver.class);
-
-
+    
     private final UserOperator userOperator;
     private final InventoryItemOperator inventoryItemOperator;
 
@@ -23,7 +22,7 @@ public class RandomItemGiver {
         this.inventoryItemOperator = inventoryItemOperator;
     }
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 120000)
     public void giveRandomUserRandomItem() {
         final User randomUser = userOperator.getRandomUser();
         final InventoryItem inventoryItem = inventoryItemOperator.giveUserRandomItem(randomUser.getId());

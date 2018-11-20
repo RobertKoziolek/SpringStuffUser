@@ -85,8 +85,13 @@ liquibase {
     }
 }
 
-task dropAndUpdate(group: 'application') << {
+task liqDropAndUpdate(group: 'application') << {
     println 'Dropped database and updated'
 }
-dropAndUpdate.dependsOn dropAll
-dropAndUpdate.dependsOn update
+liqDropAndUpdate.dependsOn dropAll
+liqDropAndUpdate.dependsOn update
+
+task liqUpdate(group: 'application') << {
+    println 'Updated database'
+}
+liqUpdate.dependsOn update
