@@ -14,6 +14,7 @@
 </head>
 <body>
 <div class="container">
+    <header th:replace="header_fragment.html :: header (activePage='error')"></header>
     <h1>Error page!</h1>
     <div class="alert alert-danger" role="alert">
         <table class="table">
