@@ -1,5 +1,6 @@
 package com.robcio.springstuff.controller;
 
+import com.robcio.springstuff.controller.request.UserRequest;
 import com.robcio.springstuff.entity.User;
 import com.robcio.springstuff.service.UserService;
 import io.swagger.annotations.Api;
@@ -23,14 +24,19 @@ public class UserController {
 
     @PostMapping(path = "/add")
     @ApiOperation(value = "Adds a user")
-    public String add(@ModelAttribute final User user) {
-        userService.add(user);
-        return "success";
+    public Long add(@RequestBody final UserRequest user) {
+        return userService.add(user);
     }
 
     @GetMapping(path = "/")
     @ApiOperation(value = "Returns all users")
     public List<User> getAllUsers() {
-        return userService.findAll();
+        return userService.getAll();
+    }
+
+    @GetMapping(path = "/{userId}")
+    @ApiOperation(value = "Returns a user by id")
+    public User getAllUsers(@PathVariable final Long userId) {
+        return userService.getUser(userId);
     }
 }

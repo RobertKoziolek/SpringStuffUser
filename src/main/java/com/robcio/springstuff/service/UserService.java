@@ -1,5 +1,6 @@
 package com.robcio.springstuff.service;
 
+import com.robcio.springstuff.controller.request.UserRequest;
 import com.robcio.springstuff.entity.User;
 import com.robcio.springstuff.exception.UserNotFoundException;
 import com.robcio.springstuff.repository.UserRepository;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Component
 public class UserService {
@@ -29,11 +32,24 @@ public class UserService {
                              .orElseThrow(UserNotFoundException::new);
     }
 
-    public void add(final User user) {
+    public Long add(final UserRequest userRequest) {
+        final User user = new User();
+        validateUserRequest(userRequest);
+        user.setName(userRequest.getName());
+        user.setEmail(userRequest.getEmail());
+        user.setAge(userRequest.getAge());
         userRepository.save(user);
+        return user.getId();
     }
 
-    public List<User> findAll() {
+    private void validateUserRequest(final UserRequest userRequest) {
+        assertThat(userRequest.getAge()).isNotNull();
+        assertThat(userRequest.getName()).isNotNull();
+        assertThat(userRequest.getEmail()).isNotNull();
+    }
+
+    public List<User> getAll() {
         return userRepository.findAll();
     }
+
 }

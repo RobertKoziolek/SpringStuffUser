@@ -71,7 +71,7 @@ dependencies {
 
     //TEST
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.11.1'
+    compile group: 'org.assertj', name: 'assertj-core', version: '3.11.1'
 
 }
 
