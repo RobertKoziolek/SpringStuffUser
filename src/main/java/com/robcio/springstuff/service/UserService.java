@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class UserService {
 
@@ -27,4 +29,11 @@ public class UserService {
                              .orElseThrow(UserNotFoundException::new);
     }
 
+    public void add(final User user) {
+        userRepository.save(user);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 }

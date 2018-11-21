@@ -1,5 +1,6 @@
 package com.robcio.springstuff.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.robcio.springstuff.enumeration.ItemType;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class InventoryItem {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     private String name;

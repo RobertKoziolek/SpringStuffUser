@@ -2,17 +2,14 @@ package com.robcio.springstuff.controller;
 
 import com.robcio.springstuff.dto.InventoryItemData;
 import com.robcio.springstuff.entity.InventoryItem;
-import com.robcio.springstuff.enumeration.ItemType;
 import com.robcio.springstuff.repository.UserRepository;
 import com.robcio.springstuff.service.InventoryItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping(path = "/items")
 @Api(value = "/items", description = "Operations about items")
 public class InventoryItemController {
@@ -29,21 +26,11 @@ public class InventoryItemController {
 
     @PostMapping(path = "/add")
     @ApiOperation(value = "Adds an item")
-    public String addItem(@ModelAttribute final InventoryItemData itemData) {
+    public InventoryItem addItem(@ModelAttribute final InventoryItemData itemData) {
         final InventoryItem item = inventoryItemService.createItem(itemData);
-        return "redirect:/items/" + item.getUser()
-                                        .getId();
+        return item;
     }
 
-    @GetMapping(path = "/add/view")
-    @ApiOperation(value = "Shows 'add item' thymeleaf page")
-    public String addItemView(final Model model) {
-        model.addAttribute("users", userRepository.findAll());
-        model.addAttribute("itemTypes", ItemType.values());
-        return "add_item";
-    }
-
-    @ResponseBody
     @GetMapping(path = "/{userId}")
     @ApiOperation(value = "Gets items a user possesses")
     public String getForUser(@PathVariable final Long userId) {

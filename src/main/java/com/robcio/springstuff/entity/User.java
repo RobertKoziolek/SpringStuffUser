@@ -1,5 +1,6 @@
 package com.robcio.springstuff.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.robcio.springstuff.enumeration.UserStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class User {
     private Integer age;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private Set<InventoryItem> items;
 
     @Enumerated(EnumType.STRING)
