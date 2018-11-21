@@ -21,7 +21,7 @@ public class ItemNameGenerator {
         this.secondPartMap.put(ItemType.ARMOR, Arrays.asList("Breastplate", "Jacket", "Shirt"));
         this.secondPartMap.put(ItemType.HELMET, Arrays.asList("Cap", "Hat", "Helmet"));
         this.secondPartMap.put(ItemType.CONTAINER, Arrays.asList("Bag", "Box", "Backpack"));
-        this.secondPartMap.put(ItemType.KEY, Collections.singletonList("Key"));
+        this.secondPartMap.put(ItemType.KEY, Arrays.asList("Key", "Card", "Id"));
     }
 
     public String getFor(final ItemType type) {

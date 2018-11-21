@@ -23,8 +23,7 @@ public class RandomItemGiver {
     @Scheduled(fixedRate = 240000)
     public void giveRandomUserRandomItem() {
         final User randomUser = userService.getRandomUser();
-        final RandomRewardEvent randomRewardEvent = new RandomRewardEvent(this,
-                                                                          randomUser.getId(),
+        final RandomRewardEvent randomRewardEvent = new RandomRewardEvent(randomUser.getId(),
                                                                           randomUser.getName());
         applicationEventPublisher.publishEvent(randomRewardEvent);
     }

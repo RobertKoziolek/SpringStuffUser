@@ -1,6 +1,7 @@
 package com.robcio.springstuff.controller;
 
 import com.robcio.springstuff.dto.InventoryItemData;
+import com.robcio.springstuff.entity.InventoryItem;
 import com.robcio.springstuff.enumeration.ItemType;
 import com.robcio.springstuff.repository.UserRepository;
 import com.robcio.springstuff.service.InventoryItemService;
@@ -29,8 +30,9 @@ public class InventoryItemController {
     @PostMapping(path = "/add")
     @ApiOperation(value = "Adds an item")
     public String addItem(@ModelAttribute final InventoryItemData itemData) {
-        inventoryItemService.createItem(itemData);
-        return "redirect:/items/" + itemData.getUserId();
+        final InventoryItem item = inventoryItemService.createItem(itemData);
+        return "redirect:/items/" + item.getUser()
+                                        .getId();
     }
 
     @GetMapping(path = "/add/view")

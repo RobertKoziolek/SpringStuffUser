@@ -6,11 +6,11 @@ import com.robcio.springstuff.service.InventoryItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RandomRewardEventListener implements ApplicationListener<RandomRewardEvent> {
+public class RandomRewardEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(RandomRewardEventListener.class);
 
@@ -21,8 +21,8 @@ public class RandomRewardEventListener implements ApplicationListener<RandomRewa
         this.inventoryItemService = inventoryItemService;
     }
 
-    @Override
-    public void onApplicationEvent(final RandomRewardEvent event) {
+    @EventListener
+    public void handleEvent(final RandomRewardEvent event) {
         final InventoryItem item = inventoryItemService.getRandomItem();
         inventoryItemService.giveItem(event.getUserId(), item);
         logger.debug("Giving {} to {}", item.getName(), event.getName());

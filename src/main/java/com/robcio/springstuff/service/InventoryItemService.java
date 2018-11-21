@@ -50,14 +50,16 @@ public class InventoryItemService {
         return inventoryItemRepository.findByUserId(userId)
                                       .stream()
                                       .map(InventoryItem::getName)
+                                      .sorted()
                                       .reduce((f, s) -> String.format("%s, %s", f, s))
                                       .orElse("");
     }
 
-    public void createItem(final InventoryItemData itemData) {
+    public InventoryItem createItem(final InventoryItemData itemData) {
         final InventoryItem inventoryItem = new InventoryItem();
         inventoryItem.setName(itemData.getName());
         inventoryItem.setType(itemData.getType());
         giveItem(itemData.getUserId(), inventoryItem);
+        return inventoryItem;
     }
 }

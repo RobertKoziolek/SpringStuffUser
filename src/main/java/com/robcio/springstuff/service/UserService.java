@@ -1,6 +1,7 @@
 package com.robcio.springstuff.service;
 
 import com.robcio.springstuff.entity.User;
+import com.robcio.springstuff.exception.UserNotFoundException;
 import com.robcio.springstuff.repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserService {
     @NotNull
     public User getUser(final Long userId) {
         return userRepository.findById(userId)
-                             .orElseThrow(() -> new RuntimeException("Cannot find the user"));
+                             .orElseThrow(UserNotFoundException::new);
     }
 
 }
