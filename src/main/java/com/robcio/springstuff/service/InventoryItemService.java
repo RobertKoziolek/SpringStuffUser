@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @Service
 public class InventoryItemService {
 
@@ -56,10 +58,17 @@ public class InventoryItemService {
     }
 
     public InventoryItem createItem(final InventoryItemData itemData) {
+        validateItemData(itemData);
         final InventoryItem inventoryItem = new InventoryItem();
         inventoryItem.setName(itemData.getName());
         inventoryItem.setType(itemData.getType());
         giveItem(itemData.getUserId(), inventoryItem);
         return inventoryItem;
+    }
+
+    private void validateItemData(final InventoryItemData itemData) {
+        assertThat(itemData.getUserId()).isNotNull();
+        assertThat(itemData.getName()).isNotNull();
+        assertThat(itemData.getType()).isNotNull();
     }
 }
