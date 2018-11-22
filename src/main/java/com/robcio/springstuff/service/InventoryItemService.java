@@ -62,12 +62,10 @@ public class InventoryItemService {
         final InventoryItem inventoryItem = new InventoryItem();
         inventoryItem.setName(itemData.getName());
         inventoryItem.setType(itemData.getType());
-        giveItem(itemData.getUserId(), inventoryItem);
         return inventoryItem;
     }
 
     private void validateItemData(final InventoryItemData itemData) {
-        assertThat(itemData.getUserId()).isNotNull();
         assertThat(itemData.getName()).isNotNull();
         assertThat(itemData.getType()).isNotNull();
     }

@@ -8,8 +8,6 @@ import lombok.Setter;
 @Setter
 public class InventoryItemData {
 
-    private Long userId;
-
     private String name;
 
     private ItemType type;
